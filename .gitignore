@@ -8,7 +8,6 @@
 /dataSources.local.xml
 
 
-frontend
 # Logs
 frontend/logs
 frontend/*.log
