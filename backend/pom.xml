@@ -55,6 +55,7 @@
     </dependencies>
 
     <build>
+        <finalName>BestDiscounts</finalName>
         <plugins>
             <plugin>
                 <groupId>org.jacoco</groupId>
