@@ -8,7 +8,7 @@ export default function SearchBar({discounts, setFilteredDiscounts}: Readonly<Se
         function filterDiscounts(e:string){
         const searchArray: DiscountInfoType[] = [];
         if(e.trim().length>0){
-            discounts.map((discount:DiscountInfoType)=>(discount.name.toLowerCase().includes(e.toLowerCase()) && searchArray.push(discount)));
+            discounts.forEach((discount:DiscountInfoType)=>(discount.name.toLowerCase().includes(e.toLowerCase()) && searchArray.push(discount)));
             setFilteredDiscounts(searchArray);
         }else{
             setFilteredDiscounts(discounts);
