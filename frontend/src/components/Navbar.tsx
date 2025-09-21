@@ -32,6 +32,16 @@ export function Navbar({user, setUser, discounts, setFilteredDiscounts,shoppingC
         return () => window.removeEventListener("scroll", handleScroll);
     }, [prevScrollPosition]);
 
+    function navigateToUserPref() {
+        nav("/userPref");
+    }
+
+    function handleKeyDown(event: React.KeyboardEvent<HTMLDivElement>) {
+        if (event.key === 'Enter' || event.key === ' ') {
+            navigateToUserPref();
+        }
+    }
+
     function logout() {
         const host: string = window.location.host === "localhost:5173" ?
             "http://localhost:8080" :
@@ -45,7 +55,7 @@ export function Navbar({user, setUser, discounts, setFilteredDiscounts,shoppingC
             <nav style={{top: visible ? '0' : '-100px'}}>
                 {/*{user && <img src={user.avatarUrl} alt={user.userName} className={"navbar-avatar"} onClick={()=>(nav("/userPref"))}/>}*/}
                 {user &&
-                    <div onClick={() => (nav("/userPref"))} className={"navbar-avatar-comp"}>
+                    <div onClick={navigateToUserPref} onKeyDown={handleKeyDown} role="button" tabIndex={0} className={"navbar-avatar-comp"}>
                         <img src={user.avatarUrl} alt={user.userName} className={"navbar-avatar"}/>
                         {shoppingCart.length > 0 &&
                             <span className={"item-number"}>
