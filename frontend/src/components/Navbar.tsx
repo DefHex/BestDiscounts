@@ -57,7 +57,7 @@ export function Navbar({user, setUser, discounts, setFilteredDiscounts,shoppingC
                 {user &&
                     <div onClick={navigateToUserPref} onKeyDown={handleKeyDown} role="button" tabIndex={0} className={"navbar-avatar-comp"}>
                         <img src={user.avatarUrl} alt={user.userName} className={"navbar-avatar"}/>
-                        {shoppingCart.length > 0 &&
+                        {shoppingCart!=null && shoppingCart.length > 0  &&
                             <span className={"item-number"}>
                                 {shoppingCart.length}
                             </span>

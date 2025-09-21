@@ -121,6 +121,13 @@ nav {
     gap: 1.5rem; /* Adjust the space between cards */
     padding: 1.5rem;
     justify-items: center; /* Center cards within their grid cell */
+
+    .no-cards{
+        align-items: center;
+        align-self: center;
+        justify-self: center;
+        text-align: center;
+    }
 }
 
 
