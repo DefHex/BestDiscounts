@@ -7,13 +7,16 @@ import UserPrefCard from "./UserPrefCard.tsx";
 type UserPrefProps = {
     user: userInfoType,
     discounts: DiscountInfoType[],
-    shoppingCart: string[]
+    shoppingCart: string[],
     setShoppingCart:(shoppingCart:string[])=>void
 }
 
 export default function UserPref({user, discounts, shoppingCart,setShoppingCart}: Readonly<UserPrefProps>) {
     const nav = useNavigate();
-    const userSavedDiscounts = discounts.filter(discount => shoppingCart.includes(discount.id));
+    let userSavedDiscounts;
+    if(shoppingCart){
+        userSavedDiscounts = discounts.filter(discount => shoppingCart.includes(discount.id));
+    }
 
     return (
         <div>
@@ -24,7 +27,7 @@ export default function UserPref({user, discounts, shoppingCart,setShoppingCart}
                 <h2>Your saved discounts:</h2>
             </div>
             <div className={"card-grid"}>
-                {userSavedDiscounts.length > 0 ?
+                {userSavedDiscounts && userSavedDiscounts.length > 0 ?
                     userSavedDiscounts.map(
                         (discount: DiscountInfoType) => (
                             <UserPrefCard key={discount.id}
@@ -35,7 +38,7 @@ export default function UserPref({user, discounts, shoppingCart,setShoppingCart}
                                           provider={discount.provider}
                                           user={user}
                                           shoppingCart={shoppingCart}
-                                          setShoppingCart={setShoppingCart}/>)) : <p>You have no saved discounts yet.</p>
+                                          setShoppingCart={setShoppingCart}/>)) : <p className={"no-cards"}>You have no saved discounts yet.</p>
                 }
             </div>
         </div>

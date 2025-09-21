@@ -17,7 +17,7 @@ export default function DashbordCard(props:Readonly<DashbordCardProps>) {
     // const [cartItems,setCartItems]=useState<string[]>(props.user.shoppingCart);
     function postAddToCart (addedElementForPreRender:string) {
         // adding the element early to render the button faster
-        props.setShoppingCart([... props.shoppingCart,addedElementForPreRender]);
+        props.setShoppingCart([...(props.shoppingCart || []),addedElementForPreRender]);
         // console.table([props.user.id,props.id]);
         axios.post("/api/changeCart",{
             userId: props.user.id,
@@ -30,14 +30,14 @@ export default function DashbordCard(props:Readonly<DashbordCardProps>) {
         }).catch(e => {
             console.error(e);
             // setting the value back in case it fails
-            props.setShoppingCart(props.shoppingCart.filter(id => id !== addedElementForPreRender));
+            props.setShoppingCart((props.shoppingCart || []).filter(id => id !== addedElementForPreRender));
         })
     }
 
     return (
         <div className={"card"}>
             <Card id={props.id} image={props.image} name={props.name} price={props.price} provider={props.provider}/>
-            {props.shoppingCart.includes(props.id)?
+            {props.shoppingCart!=null && props.shoppingCart.includes(props.id)?
                 <button className={"addedToCart"}><FaCheck /> Added to cart</button>
                 :
                 <button onClick={() => postAddToCart(props.id)}><MdAddShoppingCart /> Add to cart</button>
