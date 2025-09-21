@@ -1,15 +1,17 @@
 import type {userInfoType} from "../type/UserInfoType.ts";
 import Login from "./Login.tsx";
 import type {DiscountInfoType} from "../type/DiscountInfoType.ts";
-import Card from "./Card.tsx";
+import DashbordCard from "./DashbordCard.tsx";
 
 type DashboardProps = {
     user: userInfoType | null,
     discounts: DiscountInfoType[],
-    filteredDiscounts: DiscountInfoType[]
+    filteredDiscounts: DiscountInfoType[],
+    shoppingCart:string[],
+    setShoppingCart:(shoppingCart:string[])=>void
 }
 
-export default function Dashboard({user,discounts,filteredDiscounts}: Readonly<DashboardProps>) {
+export default function Dashboard({user, discounts, filteredDiscounts,shoppingCart,setShoppingCart}: Readonly<DashboardProps>) {
 
     return (
         <div>
@@ -20,24 +22,31 @@ export default function Dashboard({user,discounts,filteredDiscounts}: Readonly<D
                     <h2>This weeks discounts:</h2>
 
                     <div className={"card-grid"}>
-                        {filteredDiscounts.length>0 ?
+                        {filteredDiscounts.length > 0 ?
                             filteredDiscounts.map(
-                                (discount: DiscountInfoType)=>(
-                                    <Card key={discount.id}
+                                (discount: DiscountInfoType) => (
+                                    <DashbordCard key={discount.id}
                                           id={discount.id}
                                           image={discount.image}
                                           name={discount.name}
                                           price={discount.price}
-                                          provider={discount.provider}/>)):
-                            discounts.length>0&&
+                                          provider={discount.provider}
+                                          user={user}
+                                          shoppingCart={shoppingCart}
+                                          setShoppingCart={setShoppingCart}
+                                    />)) :
+                            discounts.length > 0 &&
                             discounts.map(
-                                (discount: DiscountInfoType)=>(
-                                    <Card key={discount.id}
+                                (discount: DiscountInfoType) => (
+                                    <DashbordCard key={discount.id}
                                           id={discount.id}
                                           image={discount.image}
                                           name={discount.name}
                                           price={discount.price}
-                                          provider={discount.provider}/>))
+                                          provider={discount.provider}
+                                          user={user}
+                                          shoppingCart={shoppingCart}
+                                          setShoppingCart={setShoppingCart}/>))
                         }
                     </div>
                 </div> :

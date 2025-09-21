@@ -16,6 +16,6 @@ public class AuthController {
             return null;
         }
         AppUser appUser=user.getAppUser();
-        return new AppUserDto(appUser.id(),appUser.userName(),appUser.avatarUrl());
+        return new AppUserDto(appUser.id(),appUser.userName(),appUser.avatarUrl(), appUser.shoppingCart());
     }
 }

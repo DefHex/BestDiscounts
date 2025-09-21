@@ -5,13 +5,50 @@
   text-align: center;
 }
 .app-container {
-    margin: 2rem;
-    padding: 2rem;
+    padding-top: 3rem;
     max-width: 100%;
     overflow-x: hidden;
 }
 nav {
     transition: top 0.3s;
+}
+.navbar-avatar-comp{
+    position: relative;
+    cursor: pointer;
+}
+.item-number{
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: red;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 7px;
+    font-size: 12px;
+}
+
+.search-bar {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.search-icon {
+    position: absolute;
+    left: 10px; /* Adjust as needed */
+    color: #888; /* Icon color */
+}
+
+.search-input {
+    padding-left: 35px; /* Make space for the icon */
+    width: 100%; /* Or a specific width */
+}
+
+.back-button{
+    display:flex;
+    flex-flow:row;
+    justify-content:flex-end;
+    font-size: 3rem;
 }
 .login-buttons{
     display: grid;
@@ -19,10 +56,16 @@ nav {
     justify-items: stretch;
     row-gap: 1rem;
     margin: 2rem;
-    .button{
-        padding: 2rem;
-    }
 }
+
+.login-buttons button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1rem;
+}
+
 .card {
     display: flex;
     flex-direction: column;
@@ -39,6 +82,22 @@ nav {
     .price{
         color: red;
     }
+    button{
+        background: #f3d200;
+        margin-bottom: 2rem;
+    }
+    .addedToCart{
+        background: #02a602;
+    }
+    .removeFromCart{
+        background: red;
+    }
+}
+.card-info{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 .card-image {
     position: relative;
@@ -63,6 +122,7 @@ nav {
     padding: 1.5rem;
     justify-items: center; /* Center cards within their grid cell */
 }
+
 
 nav {
     display: flex;
@@ -135,7 +195,7 @@ button:hover{
     }
     .search-bar{
         .search-input{
-            padding: 0.8em 1.5em;
+            padding: 0.8rem 1rem;
             border-radius: 2rem;
             border: 1px solid transparent;
             font-size: 1em;
