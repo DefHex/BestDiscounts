@@ -8,6 +8,7 @@ import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 @Service
@@ -45,6 +46,7 @@ public class CustomOidcUserService implements OAuth2UserService<OidcUserRequest,
                 .providerId(providerId)
                 .userName(name)
                 .avatarUrl(avatarUrl)
+                .shoppingCart(new ArrayList<>())
                 .build();
 
         System.out.println("Saved user:" + newUser);

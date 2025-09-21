@@ -7,6 +7,9 @@ import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+
+import java.util.ArrayList;
+
 import static org.mockito.Mockito.mock;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.oauth2Login;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.oidcLogin;
@@ -30,7 +33,8 @@ class AuthControllerTest {
                                                 "123456789",
                                                 "google",
                                                 "George",
-                                                "George.jpg"))
+                                                "George.jpg",
+                                                new ArrayList<>()))
                         )))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value("google:123456789"))
@@ -48,7 +52,8 @@ class AuthControllerTest {
                                                 "123456789",
                                                 "github",
                                                 "Gerry",
-                                                "Gerry.jpg"))
+                                                "Gerry.jpg",
+                                                new ArrayList<>()))
                         )))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value("github:123456789"))

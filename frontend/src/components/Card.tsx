@@ -1,8 +1,13 @@
-import type {DiscountInfoType} from "../type/DiscountInfoType.ts";
-
-export default function Card(props:Readonly<DiscountInfoType>) {
+type CardProps={
+    id: string,
+    image: string,
+    name: string,
+    price: string,
+    provider: string,
+}
+export default function Card(props:Readonly<CardProps>) {
     return (
-        <div className={"card"}>
+        <div className={"card-info"}>
             <div>
                 <img className={"card-image"} src={props.image} alt={props.name}/>
                 <h2>{props.name}</h2>

@@ -2,10 +2,9 @@ package org.example.backend.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.example.backend.model.Discount;
+import org.example.backend.security.CartItemTransferDto;
 import org.example.backend.service.DiscountsService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,5 +18,11 @@ public class DiscountsController {
     @GetMapping("/data" )
     public List<Discount> getAllDiscounts(){
         return service.getAllDiscounts();
+    }
+
+    @PostMapping("/changeCart")
+    public List<String> changeCart(@RequestBody CartItemTransferDto cartItem){
+        System.out.println("Received item from frontend:" + cartItem);
+        return service.changeCart(cartItem);
     }
 }

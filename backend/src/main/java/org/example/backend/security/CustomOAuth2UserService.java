@@ -8,6 +8,7 @@ import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 @Service
@@ -65,6 +66,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
                 .providerId(providerId)
                 .userName(name)
                 .avatarUrl(avatarUrl)
+                .shoppingCart(new ArrayList<>())
                 .build();
 
         return userRepo.save(newUser);

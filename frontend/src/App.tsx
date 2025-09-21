@@ -8,19 +8,22 @@ import {Navbar} from "./components/Navbar.tsx";
 import type {userInfoType} from "./type/UserInfoType.ts";
 import type {DiscountInfoType} from "./type/DiscountInfoType.ts";
 import Login from "./components/Login.tsx";
+import UserPref from "./components/UserPref.tsx";
+
 
 export default function App() {
 
     const [user,setUser]=useState<userInfoType|null>(null)
     const [discounts,setDiscounts]=useState<DiscountInfoType[]>([])
     const [filteredDiscounts,setFilteredDiscounts]=useState<DiscountInfoType[]>([])
-
+    const [shoppingCart,setShoppingCart]=useState<string[]>([])
     const loadUser =()=>{
         axios.get("/api/auth/me")
             .then(response=>{
                 console.log(response.data);
                 setUser(response.data);
                 DbData();
+                setShoppingCart(response.data.shoppingCart);
             }).catch(()=>setUser(null))
     }
     const DbData = () => {
@@ -32,24 +35,22 @@ export default function App() {
     }
 
     useEffect(() => {
-        loadUser()
+        loadUser();
     }, []);
 
   return (
     <>
       <div className={"app-container"}>
-          <Navbar user={user} setUser={setUser} discounts={discounts} setDiscounts={setDiscounts} setFilteredDiscounts={setFilteredDiscounts}/>
-          {!user&& <Login />}
+          <Navbar user={user} setUser={setUser} discounts={discounts} setDiscounts={setDiscounts} setFilteredDiscounts={setFilteredDiscounts} shoppingCart={shoppingCart}/>
+          {!user? <Login />:
           <Routes>
               <Route element={<ProtectedRoute user={user}/>}>
-                  <Route path={"/"} element={<Dashboard user={user} discounts={discounts} filteredDiscounts={filteredDiscounts} />}/>
+                  <Route path={"/"} element={<Dashboard user={user} discounts={discounts} filteredDiscounts={filteredDiscounts} shoppingCart={shoppingCart} setShoppingCart={setShoppingCart}/>}/>
+                  <Route path={"/userPref"} element={<UserPref user={user} discounts={discounts} shoppingCart={shoppingCart} setShoppingCart={setShoppingCart}/>}/>
               </Route>
-              <Route path={"/logout"} element={<Dashboard user={user} discounts={discounts} filteredDiscounts={filteredDiscounts}/>}/>
-              {/*<Route element={<ProtectedRoute user={user}/>}>*/}
-              {/*    <Route path={"/dashboard"} element={<Dashboard user={user} discounts={discounts} filteredDiscounts={filteredDiscounts} setFilteredDiscounts={setFilteredDiscounts}/>}/>*/}
-              {/*</Route>*/}
+              {/*<Route path={"/logout"} element={<Dashboard user={user} discounts={discounts} filteredDiscounts={filteredDiscounts}/>}/>*/}
           </Routes>
-
+          }
       </div>
     </>
   )
